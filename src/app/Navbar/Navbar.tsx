@@ -4,8 +4,9 @@ import { getServerSession } from 'next-auth';
 import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-
+import { authOptions } from '../api/auth/[...nextauth]/route';
 import ShoppingCartButton from './ShoppingCartButton';
+import UserMenuButton from './UserMenuButton';
 
 async function searchProducts(formData: FormData) {
   'use server';
@@ -18,6 +19,7 @@ async function searchProducts(formData: FormData) {
 }
 
 export default async function Navbar() {
+  const session = await getServerSession(authOptions);
   const cart = await getCart();
 
   return (
@@ -25,7 +27,7 @@ export default async function Navbar() {
       <div className='navbar m-auto max-w-7xl flex-col gap-2 sm:flex-row'>
         <div className='flex-1'>
           <Link href='/' className='btn-ghost btn text-xl normal-case'>
-            <Image src={logo} height={40} width={40} alt='Flowmazon logo' />
+            <Image src={logo} height={40} width={40} alt='Amazon logo' />
             Amazon
           </Link>
         </div>
@@ -40,6 +42,7 @@ export default async function Navbar() {
             </div>
           </form>
           <ShoppingCartButton cart={cart} />
+          <UserMenuButton session={session} />
         </div>
       </div>
     </div>

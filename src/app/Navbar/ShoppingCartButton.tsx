@@ -39,6 +39,7 @@ export default function ShoppingCartButton({ cart }: ShoppingCartButtonProps) {
           </span>
         </div>
       </label>
+
       <div
         tabIndex={0}
         className='card dropdown-content card-compact z-30 mt-3 w-52 bg-base-100 shadow'
